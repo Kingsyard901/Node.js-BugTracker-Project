@@ -1,0 +1,115 @@
+<!-- Ticket Section -->
+<div class="row">
+    <div class="col-md-6">
+        <form class="" action="/createTicket" method="post">
+            <div class="card">
+                <div class="card-header">
+                    Create New Ticket
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <label for="ticketTitle"><i class="fas fa-bug"></i> Name of Ticket</label>
+                        <input type="text" class="form-control" name="ticketTitle"
+                            placeholder="Enter a name for the ticket.">
+                        <label for="ticketSystem"><i class="far fa-window-restore"></i> System / Web App</label>
+                        <!-- <input type="text" class="form-control" name="ticketSystem" placeholder="CHANGE THIS TO DROP-DOWN FROM CUSTOMER."> -->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Choose</label>
+                            </div>
+                            <select class="custom-select" id="inputGroupSelect01" name="ticketSystem">
+                                <option selected>Customer Project...</option>
+                                <% customerListItems.forEach(function(customer){ %>
+                                <option>
+                                    <%= customer.projectName %>
+                                </option>
+                                <%});%>
+                            </select>
+                        </div>
+                        <!-- End drop down Customer -->
+                        <label for="ticketDate"><i class="far fa-calendar-check"></i> Created Date</label>
+                        <input type="date" class="form-control" name="ticketDate">
+                        <label for="ticketEndDate"><i class="far fa-calendar-check"></i> Dead-Line (End Date)</label>
+                        <input type="date" class="form-control" name="ticketEndDate">
+
+                        <label for="ticketMessage"><i class="far fa-edit"></i> Issue Description & Comments</label>
+                        <textarea class="form-control" name="ticketMessage" rows="3"
+                            placeholder="Describe the issue / problem / action that needs to be taken / resolved."></textarea>
+                        <!-- <footer class="blockquote-footer">Please note that <cite title="Source Title">your
+                                account</cite></footer> -->
+                    </blockquote>
+                </div>
+            </div>
+    </div>
+
+
+    <!-- Info Section -->
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                Information
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <label for="assignedDate"><i class="far fa-calendar-check"></i> Assigned Date</label>
+                    <input type="date" class="form-control" name="assignedDate">
+                    <label for="ticketCompleted"><i class="far fa-calendar-check"></i> Date Completed</label>
+                    <input type="date" class="form-control" name="ticketCompleted">
+
+                    <!-- Status -->
+                    <label for="ticketStatus"><i class="fas fa-thermometer-half"></i> Status</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Choose</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01" name="ticketStatus">
+                            <option selected>Not Solved</option>
+                            <option>In Progress</option>
+                            <option>Solved</option>
+                            <option>HELP</option>
+                        </select>
+                    </div>
+                    <!-- END Status -->
+
+                    <!-- Priority -->
+                    <label for="ticketPriority"><i class="fas fa-user-clock"></i> Priority</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Choose</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01" name="ticketPriority">
+                            <option>Critical</option>
+                            <option>High</option>
+                            <option selected>Medium</option>
+                            <option>Low</option>
+                        </select>
+                    </div>
+                    <!-- END Priority -->
+                    <!-- <footer class="blockquote-footer">Please note that <cite title="Source Title">your account</cite>
+                    </footer> -->
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Action Section -->
+    <div class="col-md-2">
+        <div class="form-group">
+            <div class="card">
+                <div class="card-header">
+                    Actions
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <!-- <label for="button"><i class="far fa-share-square"></i> Submit</label> -->
+                        <button class="btn btn-primary header-margin-bottom" type="submit" name="button"><i
+                                class="far fa-share-square"></i> Submit</button>
+                </div>
+                </blockquote>
+                </form>
+            </div>
+        </div>
+
+    </div>

@@ -1,0 +1,97 @@
+<!-- TOAST -->
+<!-- <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+        <div class="toast" style="position: absolute; top: 0; right: 0;">
+            <div class="toast-header">
+                <img src="..." class="rounded mr-2" alt="...">
+                <strong class="mr-auto">Bootstrap</strong>
+                <small>11 mins ago</small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="toast-body">
+                Hello, world! This is a toast message.
+            </div>
+        </div>
+    </div> -->
+
+<!-- Form -->
+
+<div class="row">
+    <div class="col-md-6">
+        <form class="" action="/users" method="post">
+            <div class="form-group">
+                <div>
+                    <h3>
+                        User information - Add New User
+                    </h3>
+                    <hr>
+                </div>
+                <label for="fullName"><i class="far fa-user"></i> Full Name</label>
+                <input type="text" class="form-control" name="fullName" placeholder="Enter users Full Name.">
+                <label for="userEmail"><i class="far fa-envelope"></i> Users Email Adress</label>
+                <input type="email" class="form-control" name="userEmail" placeholder="Enter User Email.">
+                <label for="userPassword"><i class="far fa-eye-slash"></i> Users Password</label>
+                <input type="password" class="form-control" name="userPassword" placeholder="Enter new password.">
+                <label for="assignedRole"><i class="far fa-user-circle"></i> Access Role</label>
+                <input type="text" class="form-control" id="updateRole" name="assignedRole" value=""
+                    placeholder="Role assigned to User.">
+            </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div>
+                <h3>
+                    User Access
+                </h3>
+                <hr>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="User"
+                    onclick="check()">
+                <label class="form-check-label" for="exampleRadios1">
+                    User
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                    value="Project Manager" onclick="checkPm()">
+                <label class="form-check-label" for="exampleRadios2">
+                    Project Manager
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
+                    value="Administrator" onclick="checkAdmin()">
+                <label class="form-check-label" for="exampleRadios3">
+                    Administrator
+                </label>
+            </div>
+            <!-- <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="Developer" onclick="checkDev()">
+                    <label class="form-check-label" for="exampleRadios4">
+                      Developer
+                    </label>
+                </div> -->
+            <!-- <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5" value="Customer" onclick="checkCust()">
+                    <label class="form-check-label" for="exampleRadios5">
+                      Customer
+                    </label>
+                </div> -->
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <div>
+                <h3>
+                    Actions
+                </h3>
+                <hr>
+            </div>
+            <button class="btn btn-primary header-margin-bottom" type="submit" name="button"><i
+                    class="far fa-share-square"></i> Save User</button>
+        </div>
+        </form>
+    </div>
+</div>

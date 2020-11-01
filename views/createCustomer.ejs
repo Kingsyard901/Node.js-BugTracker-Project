@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-md-6">
+        <form class="" action="/createCustomer" method="post">
+            <div class="form-group">
+                <div>
+                    <h3>
+                        Create New Customer
+                    </h3>
+                    <hr>
+                </div>
+                <label for="companyName"><i class="far fa-building"></i> Company Name</label>
+                <input type="text" class="form-control" name="companyName" placeholder="Enter company name...">
+                <!-- <label for="contactName"><i class="far fa-address-card"></i> Contact Full Name</label>
+                    <input type="text" class="form-control" name="contactName" placeholder="Contact person full name."> -->
+                <!-- <label for="contactEmail"><i class="far fa-envelope"></i> Contact Email</label>
+                    <input type="email" class="form-control" name="contactEmail" placeholder="Contact person's Email adress."> -->
+                <!-- <label for="projectName"><i class="far fa-window-restore"></i> Dedicated Project Name</label>
+                    <input type="text" class="form-control" name="projectName" placeholder="Project / System name."> -->
+                <!-- <label for="hourlyRate"><i class="fas fa-euro-sign"></i> Hourly Rate</label>
+                    <input type="text" class="form-control" name="hourlyRate" placeholder="Hourly Rate that we debit."> -->
+                <label for="billingAdress"><i class="far fa-address-card"></i> Billing Adress</label>
+                <input type="text" class="form-control" name="billingAdress" placeholder="Physical billing adress.">
+                <label for="customerActive"><i class="far fa-address-card"></i> Active/On-going Tickets</label>
+                <input type="text" class="form-control" name="customerActive"
+                    placeholder="DROP DOWN - Active/Not Active">
+
+                <!-- Hide this field but pick up the date in mongoose model -->
+                <!-- <label for="customerCreatedDate"><i class="far fa-calendar-check"></i> Created Date</label>
+                    <input type="date" class="form-control" name="customerCreatedDate"> -->
+                <!-- Hide this field but pick up the date in mongoose model -->
+
+                <label for="customerComment"><i class="far fa-edit"></i> Important Information & Customer Notes</label>
+                <textarea class="form-control" name="customerComment" rows="3" placeholder="Notes."></textarea>
+            </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div>
+                <h3>
+                    Actions
+                </h3>
+                <hr>
+            </div>
+            <button class="btn btn-primary header-margin-bottom" type="submit" name="button"><i
+                    class="far fa-share-square"></i> Save Customer</button>
+        </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<% if (ticketStatus == "Not Solved") { %>
+    Ticket ID: <%= ticketId %> | <span class="badge badge-pill badge-warning"><%= ticketStatus %></span>
+<% } else if (ticketStatus == "In Progress") { %>
+        Ticket ID: <%= ticketId %> | <span class="badge badge-pill badge-info"><%= ticketStatus %></span>
+    <%} else if (ticketStatus == "Solved") { %>
+            Ticket ID: <%= ticketId %> | <span class="badge badge-pill badge-success"><%= ticketStatus %></span>
+        <% } else if (ticketStatus == "HELP") { %>
+                Ticket ID: <%= ticketId %> | <span class="badge badge-pill badge-danger"><%= ticketStatus %></span>
+            <% } else { %>
+                    Ticket ID: <%= ticketId %> | <span class="badge badge-pill badge-light"><%= ticketStatus %></span>
+            <% } %>

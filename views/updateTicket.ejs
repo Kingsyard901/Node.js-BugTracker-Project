@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-md-6">
+        <form class="" action="/updateTicket" method="post">
+            <div class="form-group">
+                <div>
+                    <h3>
+                        Update Ticket
+                    </h3>
+                    <hr>
+                </div>
+                <label for="ticketTitle"><i class="fas fa-bug"></i> Name of Ticket</label>
+                <input type="text" class="form-control" name="ticketTitle" value="<%= title %>">
+                <label for="ticketSystem"><i class="far fa-window-restore"></i> System / Web App</label>
+                <!-- <input type="text" class="form-control" name="ticketSystem" placeholder="CHANGE THIS TO DROP-DOWN FROM CUSTOMER."> -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Choose</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelect01" name="ticketSystem">
+                        <option selected><%= ticketSystem %></option>
+                        <% customerListItems.forEach(function(customer){ %>
+                        <option>
+                            <%= customer.projectName %>
+                        </option>
+                        <%});%>
+                    </select>
+                </div>
+                <!-- End drop down Customer -->
+                <label for="ticketDate"><i class="far fa-calendar-check"></i> Created Date</label>
+                <input type="date" class="form-control" name="ticketDate" value="<%= ticketDate %>">
+                <label for="ticketEndDate"><i class="far fa-calendar-check"></i> Dead-Line (End Date)</label>
+                <input type="date" class="form-control" name="ticketEndDate" value="<%= ticketEndDate %>">
+
+                <label for="ticketMessage"><i class="far fa-edit"></i> Issue Description & Comments</label>
+                <textarea class="form-control" name="ticketMessage" rows="3"><%= content %></textarea>
+
+
+            </div>
+
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div>
+                <h3>
+                    Information
+                </h3>
+                <hr>
+            </div>
+            
+
+            <label for="assignedDate"><i class="far fa-calendar-check"></i> Assigned Date</label>
+            <input type="date" class="form-control" name="assignedDate" value="<%= assignedDate %>">
+            <label for="ticketCompleted"><i class="far fa-calendar-check"></i> Date Completed</label>
+            <input type="date" class="form-control" name="ticketCompleted" value="<%= ticketCompleted %>">
+            <!-- Status -->
+            <label for="ticketStatus"><i class="fas fa-thermometer-half"></i> Status</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Choose</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" name="ticketStatus">
+                    <option selected><%= ticketStatus %></option>
+                    <option>Not Solved</option>
+                    <option>In Progress</option>
+                    <option>Solved</option>
+                    <option>HELP</option>
+                </select>
+            </div>
+            <!-- END Status -->
+
+            <!-- Priority -->
+            <label for="ticketPriority"><i class="fas fa-user-clock"></i> Priority</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Choose</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" name="ticketPriority">
+                    <option selected><%= ticketPriority %></option>
+                    <option>Critical</option>
+                    <option>High</option>
+                    <option>Medium</option>
+                    <option>Low</option>
+                </select>
+            </div>
+            <!-- END Priority -->
+        </div>
+
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <div>
+                <h3>
+                    Actions
+                </h3>
+                <hr>
+            </div>
+            <button type="submit" name="updateTicketButton" value="<%=ticketId%>" class="btn btn-primary"><i
+                    class="far fa-share-square"></i> Save changes</button>
+        </div>
+        </form>
+    </div>
+</div>
+<form class="header-margin-bottom" action="/ticketDelete" method="post">
+    <button class="btn btn-danger post-buttons" type="submit" name="deleteTicketButton" value="<%=ticketId%>"><i
+            class="far fa-trash-alt"></i> Delete Ticket</button>
+</form>

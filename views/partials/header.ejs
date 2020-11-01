@@ -1,0 +1,68 @@
+<nav style="border: none" class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/dashboard"><i class="fas fa-bug"></i> BugTic MERN</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/dashboard">Dashboard <span class="sr-only">(current)</span></a>
+      </li>
+      <!-- Tickets menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Ticket
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/createTicket">Create New</a>
+          <!-- <a class="dropdown-item" href="/myTicket">My Tickets</a> -->
+          <a class="dropdown-item" href="/viewTicket">View All</a>
+          <!-- <a class="dropdown-item" href="viewTicketStatus">Status</a> -->
+        </div>
+      </li>
+      <!-- Projects menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Project
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/createProject">Create New</a>
+          <a class="dropdown-item" href="/viewProject">View All</a>
+          <a class="dropdown-item" href="/viewProjectReport">Report View</a>
+        </div>
+      </li>
+      <!-- Customer menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Customer
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/createCustomer">Create New</a>
+          <a class="dropdown-item" href="/viewCustomer">View All</a>
+          <a class="dropdown-item" href="/viewCustomerBilling">Billing</a>
+        </div>
+      </li>
+      <!-- User administration -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <!-- <a class="dropdown-item" href="/createUser">Create New</a>
+              <a class="dropdown-item" href="/viewUser">View All</a> -->
+          <a class="dropdown-item" href="/viewUserActivity">View Profile</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/logout">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<br>
+<br>

@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card m-b-20">
+            <div class="card-body">
+                <h4 class="mt-0 m-b-30 header-title">View All Customers</h4>
+                <!-- Search form for tickets -->
+                <form action="/viewCustomer" method="GET">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="searchCustomer" placeholder="Search for Customers"
+                            aria-label="Search for Customers" aria-describedby="Search Button for users">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary waves-effect waves-light" type="submit"
+                                value="Search">Search</button>
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <!-- End of search form -->
+                <div class="table-responsive">
+                    <table class="table table-vertical mb-1">
+
+                        <% customerListItems.forEach(function(customer){ %>
+                        <tbody>
+                            <tr>
+                                <td><%= customer.companyName %></td>
+                                <td>
+                                    <!-- <img src="//public/assets/users/ninja.png" alt="user-ninja" class="thumb-sm mr-2 rounded-circle"/> -->
+                                    <%= customer.contactName %>
+                                </td>
+                                <td><span class="badge badge-pill badge-success">Active</span></td>
+                                <td>
+                                    <!-- Text or ejs data here -->
+                                </td>
+                                <td>
+                                    <%= customer.customerComment %>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light">View
+                                        Customer</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <%});%>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

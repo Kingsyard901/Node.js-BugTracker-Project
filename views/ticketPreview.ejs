@@ -1,0 +1,71 @@
+<!-- Heading with ticket ID -->
+<div>
+    <h1>
+        <%- include("../jsfunctions/updateBadge.ejs") %>
+    </h1>
+</div>
+
+
+<div class="card">
+    <div class="card-body">
+        <!-- Buttons -->
+        <div>
+            <a button type="button" href="/updateTicket/<%= ticketId%>" role="button"
+                class="btn btn-secondary btn-sm waves-effect waves-light">Update Ticket</button></a>
+            <!-- <a button type="button" href="/ticketPreview/" role="button" class="btn btn-warning btn-sm waves-effect waves-light">Archive Ticket</button></a> -->
+            <hr>
+        </div>
+
+        <!-- Content -->
+        <div>
+            <h5>Ticket Title</h5>
+            <p><%= title %></p>
+        </div>
+        <div>
+            <h5>System</h5>
+            <p><%= ticketSystem %></p>
+        </div>
+        <div>
+            <h5>Ticket Created</h5>
+            <p><%= ticketDate %></p>
+        </div>
+        <div>
+            <h5>Deadline of ticket</h5>
+            <p><%= ticketEndDate %></p>
+        </div>
+        <div>
+            <h5>Description/Behaviour of Issue</h5>
+            <p><%= content %></p>
+        </div>
+        <!-- <div>
+            <h5>Assigned Developer</h5>
+            <p></p>
+        </div>
+        <div>
+            <h5>Project Manager</h5>
+            <p></p>
+        </div> -->
+        <div>
+            <h5>Ticket Initiated</h5>
+            <p><%= assignedDate %></p>
+        </div>
+        <div>
+            <h5>Ticket Solved Date</h5>
+            <p><%= ticketCompleted %></p>
+        </div>
+        <!-- <div>
+            <h5>Current Ticket Status</h5>
+            <p></p>
+        </div> -->
+        <div>
+            <h5>Priority of Ticket</h5>
+            <p><%= ticketPriority %></p>
+        </div>
+        <div>
+            <form class="header-margin-bottom" action="/ticketDelete" method="post">
+                <button class="btn btn-danger post-buttons" type="submit" name="deleteTicketButton"
+                    value="<%=ticketId%>"><i class="far fa-trash-alt"></i> Delete Ticket</button>
+            </form>
+        </div>
+    </div>
+</div>

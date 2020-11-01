@@ -1,0 +1,189 @@
+<div class="wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card mini-stat bg-primary">
+                    <div class="card-body mini-stat-img">
+                        <div class="mini-stat-icon">
+                            <i class="mdi mdi-cube-outline float-right"></i>
+                        </div>
+                        <div class="text-white">
+                            <h6 class="text-uppercase mb-3">Tickets Active</h6>
+                            <h4 class="mb-4"><%- nrOfTickets %></h4>
+                            <span class="badge badge-info"> +0% </span> <span class="ml-2">From last month</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card mini-stat bg-primary">
+                    <div class="card-body mini-stat-img">
+                        <div class="mini-stat-icon">
+                            <i class="mdi mdi-buffer float-right"></i>
+                        </div>
+                        <div class="text-white">
+                            <h6 class="text-uppercase mb-3">Tickets</h6>
+                            <h4 class="mb-4">0 Total created</h4>
+                            <span class="badge badge-info"> -0% </span> <span class="ml-2">This year</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card mini-stat bg-primary">
+                    <div class="card-body mini-stat-img">
+                        <div class="mini-stat-icon">
+                            <i class="mdi mdi-tag-text-outline float-right"></i>
+                        </div>
+                        <div class="text-white">
+                            <h6 class="text-uppercase mb-3">Avarage billing</h6>
+                            <h4 class="mb-4">0 000 SEK /month</h4>
+                            <span class="badge badge-warning"> 0% </span> <span class="ml-2">From previous month</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card mini-stat bg-primary">
+                    <div class="card-body mini-stat-img">
+                        <div class="mini-stat-icon">
+                            <i class="mdi mdi-briefcase-check float-right"></i>
+                        </div>
+                        <div class="text-white">
+                            <h6 class="text-uppercase mb-3">Total billing</h6>
+                            <h4 class="mb-4">0 000 SEK</h4>
+                            <span class="badge badge-success"> +0% </span> <span class="ml-2">From last year</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+        <br>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card m-b-20">
+                    <div class="card-body">
+                        <h4 class="mt-0 m-b-30 header-title">All Tickets</h4>
+                        <!-- Search form for tickets -->
+                        <form action="/dashboard" method="GET">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="search" placeholder="Search Tickets"
+                                    aria-label="Search Tickets" aria-describedby="Search Button">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary waves-effect waves-light" type="submit"
+                                        value="Search">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                        <br>
+                        <!-- End of search form -->
+
+                        <div class="table-responsive">
+                            <table class="table table-vertical mb-1">
+                                <!-- <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">System</th>
+                                        <th scope="col">Description</th>
+                                    </tr>
+                                </thead> -->
+                                <% newListItems.forEach(function(ticketList){ %>
+                                <tbody>
+                                    <tr>
+                                        <td><%= ticketList._id %></td>
+                                        <td>
+                                            <!-- <img src="public/assets/images/users/user-1.jpg" alt="user-image" class="thumb-sm mr-2 rounded-circle"/> -->
+                                            <%= ticketList.ticketTitle.substring(0, 50) + " ..." %>
+                                        </td>
+                                        <td>
+                                            <%= ticketList.ticketSystem %>
+                                        </td>
+                                        <td>
+                                            <%= ticketList.ticketMessage.substring(0, 100) + " ..." %>
+                                        </td>
+                                        <!-- if statement to show correct badges depending on priority -->
+                                        <td>
+                                            <% if (ticketList.ticketPriority == "High") { %>
+                                        <td><span
+                                                class="badge badge-pill badge-warning"><%= ticketList.ticketPriority %></span>
+                                        </td>
+                                        <% } else if (ticketList.ticketPriority == "Medium") { %>
+                                        <td><span
+                                                class="badge badge-pill badge-info"><%= ticketList.ticketPriority %></span>
+                                        </td>
+                                        <% } else if (ticketList.ticketPriority == "Critical") { %>
+                                        <td><span
+                                                class="badge badge-pill badge-danger"><%= ticketList.ticketPriority %></span>
+                                        </td>
+                                        <% } else { %>
+                                        <td><span
+                                                class="badge badge-pill badge-light"><%= ticketList.ticketPriority %></span>
+                                        </td>
+                                        <% } %>
+
+                                        <!-- if statement to show correct badges depending on status -->
+                                        <td>
+                                            <% if (ticketList.ticketStatus == "Not Solved") { %>
+                                        <td><span
+                                                class="badge badge-pill badge-warning"><%= ticketList.ticketStatus %></span>
+                                        </td>
+                                        <% } else if (ticketList.ticketStatus == "In Progress") { %>
+                                        <td><span
+                                                class="badge badge-pill badge-info"><%= ticketList.ticketStatus %></span>
+                                        </td>
+                                        <%} else if (ticketList.ticketStatus == "Solved") { %>
+                                        <td><span
+                                                class="badge badge-pill badge-success"><%= ticketList.ticketStatus %></span>
+                                        </td>
+                                        <% } else if (ticketList.ticketStatus == "HELP") { %>
+                                        <td><span
+                                                class="badge badge-pill badge-danger"><%= ticketList.ticketStatus %></span>
+                                        </td>
+                                        <% } else { %>
+                                        <td><span
+                                                class="badge badge-pill badge-light"><%= ticketList.ticketStatus %></span>
+                                        </td>
+                                        <% } %>
+                                        </td>
+                                        <td>
+                                            <!-- <a button type="button" href="/updateTicket/<%=ticketList._id%>" role="button" class="btn btn-secondary btn-sm waves-effect waves-light">Update</button></a> -->
+                                            <a button type="button" href="/ticketPreview/<%=ticketList._id%>"
+                                                role="button"
+                                                class="btn btn-secondary btn-sm waves-effect waves-light">View</button></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <%});%>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+
+    </div> <!-- end container-fluid -->
+</div>
+<!-- end wrapper -->
+
+
+
+
+<script src="public/assets/js/jquery.min.js"></script>
+
+<script src="public/assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="public/assets/js/jquery.slimscroll.js"></script>
+<script src="public/assets/js/waves.min.js"></script>
+<script src="public/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+
+
+
+
+<!--Morris Chart-->
+<!-- <script src="public/plugins/morris/morris.min.js"></script>
+      <script src="public/plugins/raphael/raphael-min.js"></script>
+      <script src="public/assets/pages/dashboard.js"></script> -->

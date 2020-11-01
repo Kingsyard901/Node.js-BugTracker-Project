@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card m-b-20">
+            <div class="card-body">
+                <h4 class="mt-0 m-b-30 header-title">Users</h4>
+                <!-- Search form for tickets -->
+                <form action="/viewUser" method="GET">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="searchUsers" placeholder="Search for Users"
+                            aria-label="Search for Users" aria-describedby="Search Button for users">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary waves-effect waves-light" type="submit"
+                                value="Search">Search</button>
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <!-- End of search form -->
+                <div class="table-responsive">
+                    <table class="table table-vertical mb-1">
+
+                        <% newListItems.forEach(function(userList){ %>
+                        <tbody>
+                            <tr>
+                                <td><%= userList.name %></td>
+                                <td>
+                                    <!-- <img src="//public/assets/users/ninja.png" alt="user-ninja" class="thumb-sm mr-2 rounded-circle"/> -->
+                                    <%= userList.email %>
+                                </td>
+                                <td><span class="badge badge-pill badge-success">Active</span></td>
+                                <td>
+                                    <!-- Text or ejs data here -->
+                                </td>
+                                <td>
+                                    <%= userList.date %>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light">View
+                                        Profile</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <%});%>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

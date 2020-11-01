@@ -1,0 +1,42 @@
+Guide for adding sections, pages and data management.
+
+1. Adding Models
+Folder: /models
+Example of model:
+
+    const mongoose = require("mongoose");
+
+const UserSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+const User = mongoose.model("User", UserSchema);
+
+module.exports = User;
+
+
+
+2. Add pages and routes.
+    a. Add a new .ejs page in /views
+    b. Add boilerplate:
+        <div></div>
+    c. Add route in /routes/index.js
+    d. If page needs to be protected, add: ensureAuthenticated
+    
+
+3. 
