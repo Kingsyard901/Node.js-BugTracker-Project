@@ -13,22 +13,19 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.get("/", (req, res) => res.render("welcome"));
 
 //Dashboard
-// router.get("/dashboard", ensureAuthenticated, (req, res) => 
-// res.render("dashboard", {
-//     name: req.user.name (HENRIK - KOLLA TRAVERSYS video om vad denna raden gjorde...)
-// }));
-
-//Dashboard
 router.get("/dashboard", ensureAuthenticated, function(req, res) {
         //Authentication on viewing only users tickets
         const loggedInUser = req.user._id;
 
     //Dashboard Active Tickets box
-    Ticket.countDocuments({createdByUser: loggedInUser}, function(err, itemCount) {
+    async function countingTickets() {
+    await Ticket.countDocuments({createdByUser: loggedInUser}, function(err, itemCount) {
         if (!err) {
             nrOfTickets = itemCount;
         };
     });
+    }
+    countingTickets();
 
     //https://www.youtube.com/watch?v=9_lKMTXVk64
     if (req.query.search) {
@@ -53,18 +50,6 @@ router.get("/dashboard", ensureAuthenticated, function(req, res) {
 router.get("/createTicket", ensureAuthenticated, (req, res) => {
     
     async function generateListItems() {
-        // await User.find({}).sort({ name: 1 }).exec(function(err, userItems) {
-        //     res.render("createTicket", {
-        //         userListItems: userItems,
-        //     });
-        // });
-
-        // await Customer.find({}).sort({ projectName: 1 }).exec(function(err, customerItems) {
-        //     res.render("createTicket", {
-        //         customerListItems: customerItems,
-        //     });
-        // });
-
         await Customer.find({}).sort({ projectName: 1 }).exec(function(err, customerItems) {
             if (!err) {
                 res.render("createTicket", {
@@ -117,12 +102,6 @@ router.post("/createTicket", ensureAuthenticated, function(req, res) {
     res.redirect("/dashboard");
 });
 
-//myTicket
-// router.get("/myTicket", ensureAuthenticated, (req, res) => 
-// res.render("myTicket", {
-//     name: req.user.name
-// }));
-
 //viewTicket
 router.get("/viewTicket", ensureAuthenticated, function(req, res) {
     //Authentication on viewing only users tickets
@@ -134,12 +113,6 @@ router.get("/viewTicket", ensureAuthenticated, function(req, res) {
         });
     });
 });
-
-//viewTicketStatus
-// router.get("/viewTicketStatus", ensureAuthenticated, (req, res) => 
-// res.render("viewTicketStatus", {
-//     name: req.user.name
-// }));
 
 //updateTicket View
 router.get("/updateticket/:postId", ensureAuthenticated, (req, res) => {
@@ -256,15 +229,6 @@ res.render("viewProjectReport", {
 
 //CUSTOMERS -----------------
 //createCustomer View
-// router.get("/createCustomer", function(req, res) {
-
-//     Customer.find({}).sort({ companyName: 1 }).exec(function(err, companyItems) {
-//         res.render("createCustomer", {
-//             customerListItems: companyItems,
-//         });
-//     });
-// });
-
 router.get("/createCustomer", ensureAuthenticated, (req, res) => 
 res.render("createCustomer", {
     name: req.user.name
@@ -297,21 +261,6 @@ router.post("/createCustomer", ensureAuthenticated, (req, res) => {
     res.redirect("/viewCustomer");
     console.log("Customer saved to database.");
 });
-
-//viewCustomer
-// router.get("/viewCustomer", ensureAuthenticated, (req, res) => 
-// res.render("viewCustomer", {
-//     name: req.user.name
-// }));
-
-// router.get("/viewCustomer", ensureAuthenticated, (req, res) => {
-        
-//     Customer.find({}).sort({ companyName: 1 }).exec(function(err, companyItems) {
-//         res.render("viewCustomer", {
-//             customerListItems: companyItems,
-//         });
-//     });
-// });
 
 router.get("/viewCustomer", ensureAuthenticated, function(req, res) {
 
@@ -346,12 +295,6 @@ res.render("createUser", {
     name: req.user.name
 }));
 
-//viewUser
-// router.get("/viewUser", ensureAuthenticated, (req, res) => 
-// res.render("viewUser", {
-//     name: req.user.name
-// }));
-
 router.get("/viewUser", ensureAuthenticated, function(req, res) {
     User.find({}, function(err, foundItems) {
         res.render("viewUser", {
@@ -359,12 +302,6 @@ router.get("/viewUser", ensureAuthenticated, function(req, res) {
         });
     });
 });
-
-//viewUserActivity
-// router.get("/viewUserActivity", ensureAuthenticated, (req, res) => 
-// res.render("viewUserActivity", {
-//     name: req.user.name
-// }));
 
 router.get("/viewUserActivity", ensureAuthenticated, function(req, res) {
     const loggedInUser = req.user._id;
@@ -380,7 +317,7 @@ router.get("/viewUserActivity", ensureAuthenticated, function(req, res) {
 });
 
 
-//Declaration. See link to stack overflow: https://stackoverflow.com/questions/38421664/fuzzy-searching-with-mongodb
+//Declaration Searchfunction. See link to stack overflow: https://stackoverflow.com/questions/38421664/fuzzy-searching-with-mongodb
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
