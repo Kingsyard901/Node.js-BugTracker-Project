@@ -13,11 +13,13 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.get("/", (req, res) => res.render("welcome"));
 
 //Dashboard
+// When I log in, I many times get error that nrOfTickets is not defined... Is it because I run the server local? Or do I need to set async/await on page load somehow?
 router.get("/dashboard", ensureAuthenticated, function(req, res) {
         //Authentication on viewing only users tickets
         const loggedInUser = req.user._id;
 
     //Dashboard Active Tickets box
+    // Should move this to separate JS file and then just call function.
     async function countingTickets() {
     await Ticket.countDocuments({createdByUser: loggedInUser}, function(err, itemCount) {
         if (!err) {
