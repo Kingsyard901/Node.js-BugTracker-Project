@@ -1,0 +1,64 @@
+<%- include("partials/header"); -%>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card m-b-20">
+            <div class="card-body">
+                <h4 class="mt-0 m-b-30 header-title">Solved (Archived) Tickets</h4>
+                <div class="table-responsive">
+                    <table class="table table-vertical mb-1">
+                        <!-- <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">System</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead> -->
+
+                        <% newListItems.forEach(function(ticketList){ %>
+                        <tbody>
+                            <tr>
+                                <td><%= ticketList._id %></td>
+                                <td>
+                                    <!-- <img src="public/assets/images/users/user-1.jpg" alt="user-image" class="thumb-sm mr-2 rounded-circle"/> -->
+                                    <%= ticketList.ticketTitle.substring(0, 50) + " ..." %>
+                                </td>
+                                <td>
+                                    <%= ticketList.ticketSystem %>
+                                </td>
+                                <td>
+                                    <%= ticketList.ticketMessage.substring(0, 100) + " ..." %>
+                                </td>
+                                <td>
+                                    <% if (ticketList.ticketStatus == "Not Solved") { %>
+                                <td><span class="badge badge-pill badge-warning"><%= ticketList.ticketStatus %></span>
+                                </td>
+                                <% } else if (ticketList.ticketStatus == "In Progress") { %>
+                                <td><span class="badge badge-pill badge-info"><%= ticketList.ticketStatus %></span></td>
+                                <%} else if (ticketList.ticketStatus == "Solved") { %>
+                                <td><span class="badge badge-pill badge-success"><%= ticketList.ticketStatus %></span>
+                                </td>
+                                <% } else if (ticketList.ticketStatus == "HELP") { %>
+                                <td><span class="badge badge-pill badge-danger"><%= ticketList.ticketStatus %></span>
+                                </td>
+                                <% } else { %>
+                                <td><span class="badge badge-pill badge-light"><%= ticketList.ticketStatus %></span>
+                                </td>
+                                <% } %>
+                                </td>
+                                <td>
+                                    <a button type="button" href="/ticketPreview/<%=ticketList._id%>" role="button"
+                                        class="btn btn-secondary btn-sm waves-effect waves-light">View</button></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <%});%>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end row -->

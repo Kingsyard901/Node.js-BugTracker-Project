@@ -14,7 +14,8 @@ router.get("/", (req, res) => res.render("welcome"));
 
 //Dashboard
 // When I log in, I many times get error that nrOfTickets is not defined... Is it because I run the server local? Or do I need to set async/await on page load somehow?
-router.get("/dashboard", ensureAuthenticated, function(req, res) {
+// Added "async" before function in below router.get but I can't tell if it works yet.
+router.get("/dashboard", ensureAuthenticated, async function(req, res) {
         //Authentication on viewing only users tickets
         const loggedInUser = req.user._id;
 
@@ -49,7 +50,7 @@ router.get("/dashboard", ensureAuthenticated, function(req, res) {
 
 // TICKETS -----------------
 //Loading createTicket page
-router.get("/createTicket", ensureAuthenticated, (req, res) => {
+router.get("/createTicket", ensureAuthenticated, async (req, res) => {
     
     async function generateListItems() {
         await Customer.find({}).sort({ projectName: 1 }).exec(function(err, customerItems) {
@@ -67,7 +68,7 @@ router.get("/createTicket", ensureAuthenticated, (req, res) => {
 });
 
 //Saving ticket to createTicket Post on to DB
-router.post("/createTicket", ensureAuthenticated, function(req, res) {
+router.post("/createTicket", ensureAuthenticated, async function(req, res) {
 
     const createdByUser = req.user._id;
     const ticketTitle = req.body.ticketTitle;
@@ -105,7 +106,7 @@ router.post("/createTicket", ensureAuthenticated, function(req, res) {
 });
 
 //viewTicket
-router.get("/viewTicket", ensureAuthenticated, function(req, res) {
+router.get("/viewTicket", ensureAuthenticated, async function(req, res) {
     //Authentication on viewing only users tickets
     const loggedInUser = req.user._id;
 
@@ -116,8 +117,20 @@ router.get("/viewTicket", ensureAuthenticated, function(req, res) {
     });
 });
 
+//viewTicket
+router.get("/viewArchivedTickets", ensureAuthenticated, async function(req, res) {
+    //Authentication on viewing only users tickets
+    const loggedInUser = req.user._id;
+
+    Ticket.find({ticketStatus: "Solved"}, function(err, foundItems) {
+        res.render("viewArchivedTickets", {
+            newListItems: foundItems,
+        });
+    });
+});
+
 //updateTicket View
-router.get("/updateticket/:postId", ensureAuthenticated, (req, res) => {
+router.get("/updateticket/:postId", ensureAuthenticated, async (req, res) => {
     const requestedPostId = req.params.postId;
     const loggedInUser = req.user._id;
 
@@ -152,7 +165,7 @@ router.get("/updateticket/:postId", ensureAuthenticated, (req, res) => {
 });
 
 //updateTicket POST Update
-router.post("/updateTicket", ensureAuthenticated, (req, res) => {
+router.post("/updateTicket", ensureAuthenticated, async (req, res) => {
     let updateTitleId = req.body.updateTicketButton;
 
     const ticketTitle = req.body.ticketTitle;
@@ -174,7 +187,7 @@ router.post("/updateTicket", ensureAuthenticated, (req, res) => {
 });
 
 //Ticket Preview when opening from Dashboard
-router.get("/ticketPreview/:postId", ensureAuthenticated, function(req, res) {
+router.get("/ticketPreview/:postId", ensureAuthenticated, async function(req, res) {
 
     const requestedPostId = req.params.postId;
     const loggedInUser = req.user._id;
@@ -199,7 +212,7 @@ router.get("/ticketPreview/:postId", ensureAuthenticated, function(req, res) {
 
 
 //DELETE TICKET
-router.post("/ticketDelete", function(req, res) {
+router.post("/ticketDelete", async function(req, res) {
     let checkedItemId = req.body.deleteTicketButton;
     Ticket.findByIdAndRemove(checkedItemId, function(err) {
         if (!err) {
@@ -211,19 +224,19 @@ router.post("/ticketDelete", function(req, res) {
 
 //PROJECTS -----------------
 //createProject
-router.get("/createProject", ensureAuthenticated, (req, res) => 
+router.get("/createProject", ensureAuthenticated, async (req, res) => 
 res.render("createProject", {
     name: req.user.name
 }));
 
 //viewProject
-router.get("/viewProject", ensureAuthenticated, (req, res) => 
+router.get("/viewProject", ensureAuthenticated, async (req, res) => 
 res.render("viewProject", {
     name: req.user.name
 }));
 
 //viewProjectReport
-router.get("/viewProjectReport", ensureAuthenticated, (req, res) => 
+router.get("/viewProjectReport", ensureAuthenticated, async (req, res) => 
 res.render("viewProjectReport", {
     name: req.user.name
 }));
@@ -231,14 +244,14 @@ res.render("viewProjectReport", {
 
 //CUSTOMERS -----------------
 //createCustomer View
-router.get("/createCustomer", ensureAuthenticated, (req, res) => 
+router.get("/createCustomer", ensureAuthenticated, async (req, res) => 
 res.render("createCustomer", {
     name: req.user.name
 }));
 
 
 //createCustomer POST
-router.post("/createCustomer", ensureAuthenticated, (req, res) => {
+router.post("/createCustomer", ensureAuthenticated, async (req, res) => {
     const companyName = req.body.companyName;
     const contactName = req.body.contactName;
     const contactEmail = req.body.contactEmail;
@@ -264,7 +277,7 @@ router.post("/createCustomer", ensureAuthenticated, (req, res) => {
     console.log("Customer saved to database.");
 });
 
-router.get("/viewCustomer", ensureAuthenticated, function(req, res) {
+router.get("/viewCustomer", ensureAuthenticated, async function(req, res) {
 
     if (req.query.searchCustomer) {
         const regex = new RegExp(escapeRegex(req.query.searchCustomer), 'gi');
@@ -284,7 +297,7 @@ router.get("/viewCustomer", ensureAuthenticated, function(req, res) {
 
 
 //viewCustomerBilling
-router.get("/viewCustomerBilling", ensureAuthenticated, (req, res) => 
+router.get("/viewCustomerBilling", ensureAuthenticated, async (req, res) => 
 res.render("viewCustomerBilling", {
     name: req.user.name
 }));
@@ -292,12 +305,12 @@ res.render("viewCustomerBilling", {
 
 //USERS -----------------
 //createUser
-router.get("/createUser", ensureAuthenticated, (req, res) => 
+router.get("/createUser", ensureAuthenticated, async (req, res) => 
 res.render("createUser", {
     name: req.user.name
 }));
 
-router.get("/viewUser", ensureAuthenticated, function(req, res) {
+router.get("/viewUser", ensureAuthenticated, async function(req, res) {
     User.find({}, function(err, foundItems) {
         res.render("viewUser", {
             newListItems: foundItems,
@@ -305,7 +318,7 @@ router.get("/viewUser", ensureAuthenticated, function(req, res) {
     });
 });
 
-router.get("/viewUserActivity", ensureAuthenticated, function(req, res) {
+router.get("/viewUserActivity", ensureAuthenticated, async function(req, res) {
     const loggedInUser = req.user._id;
     const loggedInUserName = req.user.name;
     const loggedInUserEmail = req.user.email;
